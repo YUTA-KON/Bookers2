@@ -1,18 +1,30 @@
 class BooksController < ApplicationController
     def edit
+        @book =Book.find(params[:id])
     end
 
     def update
+        @book = Book.find(params[:id])
+        if @book.update(book_params)
+            redirect_to book_path(@book), notice: 'Book was successfully updated.'
+        else
+            @newbook = @book
+            @user = current_user
+            @books = Book.all
+            render :index
+        end
     end
 
     #投稿データの保存
     def create
-        @book = Book.new(book_params)
-        @book.user_id = current_user.id
-        if @book.save
-            redirect_to books_path
+        @newbook = Book.new(book_params)
+        @newbook.user_id = current_user.id
+        if @newbook.save
+            redirect_to books_path, notice: 'Book was successfully created'
         else
-            render :new
+            @user = current_user
+            @books = Book.all
+            render :index
         end
     end
 
