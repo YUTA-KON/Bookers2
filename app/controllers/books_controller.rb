@@ -24,7 +24,7 @@ class BooksController < ApplicationController
         @newbook = Book.new(book_params)
         @newbook.user_id = current_user.id
         if @newbook.save
-            redirect_to books_path, notice: 'Book was successfully created'
+            redirect_to book_path(@newbook), notice: 'Book was successfully created'
         else
             @user = current_user
             @books = Book.all

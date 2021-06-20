@@ -7,9 +7,15 @@ class UsersController < ApplicationController
     def show
         @user = User.find(params[:id])
         @books = @user.books
+        @newbook = Book.new
     end
     def edit
-        @user = current_user
+        if User.find(params[:id]).id == current_user.id
+            @user = current_user
+        else
+            @user = current_user
+            redirect_to user_path(@user.id)
+        end
     end
     def update
         @user = User.find(params[:id])

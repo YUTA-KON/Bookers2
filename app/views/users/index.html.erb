@@ -9,6 +9,7 @@
           <tr>
             <th>image</th>
             <th>name</th>
+            <th></th>
             <th colspan="3"></th>
           </tr>
         </thead>
@@ -21,6 +22,7 @@
             <td><%= link_to user_path(u.id) do %>
               <%=u.name%>
             <% end %></td>
+            <td><%= link_to "Show", user_path(u.id) %></td>
           </tr>
           <% end%>
         </tbody>
